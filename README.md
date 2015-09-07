@@ -50,3 +50,15 @@ the server completed 294525
 
 the server completed 202087
  3000 30  30.22s user 22.82s system 171% cpu 30.992 total
+
+#### elixir
+
+crashes with strange errors under heavy load. I am currently running it
+with
+
+```bash
+elixirc server.ex
+elixir -e Echo.Server.main
+```
+
+I am not familiar with elixir/erlang now so i am not sure this is the right way to run a beam file.
