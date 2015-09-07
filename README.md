@@ -26,6 +26,16 @@ Here are some preliminary numbers.
 the server completed 261102
  3000 30  38.21s user 29.62s system 210% cpu 32.226 total
 
+#### rust mioco
+
+times out on 3000 clients.
+
+does ~66k requests with 128 clients. 
+
+guessing there's some bugs currently that make it not deal correctly with closing
+the sockets. also the lower request processing rate is because it runs on 1 kernel thread.
+This is normal since i'm depending on bleeding edge implementation.
+
 #### golang
 
 the server completed 297555
