@@ -10,11 +10,12 @@ import System.Environment
 import Control.Concurrent
 import Control.Concurrent.Async
 import Data.Time.Clock.POSIX
+import Data.Conduit.Binary as CB
 
 import qualified Data.ByteString as BS
 
 msg = BS.concat $ Prelude.replicate 100 "this is my message bitch"
-
+readLen = BS.length msg
 
 run = runBench
 
@@ -25,9 +26,11 @@ runBench = do
   let testTime =  read $ args !! 1 -- in seconds
   putStrLn $ "testing for " ++ show clientCount ++ " clients for " ++ show testTime ++ " seconds."
 
-  reqCounts <- mapConcurrently (connThread testTime) [1..clientCount]
-
+  reqCounts <- runConns clientCount testTime
   putStrLn $ "the server completed " ++ show (sum reqCounts)
+
+runConns clientCount testTime = do
+  mapConcurrently (connThread testTime) [1..clientCount]
 
 connThread testTime tid = do
   start <- getTime
@@ -43,8 +46,9 @@ loop testTime startTime reqCount = do
 runConn :: IO ()
 runConn = runTCPClient (clientSettings 4000 "127.0.0.1") $ \app -> do
   sourceList [msg] $$ appSink app
-  res <- appSource app $$ CL.take 1
+  res <- appSource app =$ CB.isolate readLen $$ CL.consume
   return ()
+
 
 getTime :: IO Integer
 getTime = (round) `fmap` getPOSIXTime

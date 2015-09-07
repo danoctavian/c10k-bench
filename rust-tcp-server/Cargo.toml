@@ -6,3 +6,5 @@ authors = [ "Dan Octavian <danoctavian91@gmail.com>" ]
 
 [dependencies]
 coio = { git = "https://github.com/zonyitoo/coio-rs.git"}
+clap = "*"
+mio = "*"
