@@ -1,0 +1,10 @@
+[package]
+
+name = "rust-mioco-server"
+version = "0.0.1"
+authors = [ "Dan Octavian <danoctavian91@gmail.com>" ]
+
+[dependencies]
+mioco = { git = "https://github.com/dpc/mioco.git"}
+clap = "*"
+mio = "*"
