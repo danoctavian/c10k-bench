@@ -2,7 +2,18 @@
 
 ## Benchmarks
 
-Conditions: 3000 concurrent connections for 30s.
+Server type: Echo server.
+
+Conditions:
+
+CONN_COUNT = 3000 concurrent connections 
+DURATION = 30s.
+
+Running the echo server and the client on localhost.
+
+The haskell client creates CONN_COUNT lightweight threads that each open
+socket connections send data, receive the echoed data and close the socket.
+They check the current time after each request and stop if DURATION have passed. 
 
 Measuring the number of requests completed by the server.
 
