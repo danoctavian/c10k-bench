@@ -6,7 +6,7 @@ module EchoServer
 
  def receive_data data
    send_data data
-   close_connection if data =~ /quit/i
+#   close_connection if data =~ /quit/i
  end
 
  def unbind
