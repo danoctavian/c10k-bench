@@ -36,6 +36,8 @@ M:N
 
 ### Rust
 
+1:1
+
 https://mail.mozilla.org/pipermail/rust-dev/2013-November/006550.html
 
 https://msdn.microsoft.com/en-us/library/windows/desktop/dd627187(v=vs.85).aspx
@@ -44,3 +46,13 @@ it seems that ideally you have OS level support for userland thread scheduling
 (and stack management maybe)
 
 right now there is no such thing on linux.
+
+### Dart
+
+M:N
+
+Dart uses a different model running an event loop per isolate.
+
+An isolate maps to one kernel thread.
+
+No green threads really. isolates communicate through ports.

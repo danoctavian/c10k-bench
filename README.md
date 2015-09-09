@@ -127,3 +127,19 @@ elixir -e Echo.Server.main
 ```
 
 I am not familiar with elixir/erlang now so i am not sure this is the right way to run a beam file.
+
+
+#### Google Dart
+
+go-bencher
+
+Speed: 16723 request/sec, 16708 response/sec
+Requests: 501693
+Responses: 501257
+GOMAXPROCS=64 ./tcp_bencher -c=2000 -t=30 -a=""  21.12s user 24.95s system 147% cpu 31.320 total
+
+A lot of broken pipe errors.
+
+bencher
+
+my test is flawed and stops whenever it gets a "connection reset by peer" exception.
