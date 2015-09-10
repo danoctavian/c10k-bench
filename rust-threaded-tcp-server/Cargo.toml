@@ -1,0 +1,8 @@
+[package]
+
+name = "rust-threaded-tcp-server"
+version = "0.0.1"
+authors = [ "Dan Octavian <danoctavian91@gmail.com>" ]
+
+[dependencies]
+threadpool = "0.1"
