@@ -102,6 +102,20 @@ it crashed with memory allocation errors.
 the server completed 294525
  3000 30  40.14s user 32.41s system 198% cpu 36.633 total
 
+#### cpython twisted
+
+go-bencher
+
+Speed: 7613 request/sec, 7607 response/sec
+Requests: 228417
+Responses: 228224
+./tcp_bencher  6.73s user 10.78s system 55% cpu 31.456 total
+
+Note: many of these errors occured
+2015/09/11 17:56:14 read tcp 127.0.0.1:4000: connection reset by peer
+2015/09/11 17:56:22 write tcp 127.0.0.1:4000: broken pipe
+
+
 #### clojure aleph (netty)
 
 go-bencher

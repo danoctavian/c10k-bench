@@ -13,8 +13,8 @@ import (
 var (
 	targetAddr  = flag.String("a", "127.0.0.1:4000", "target echo server address")
 	testMsgLen  = flag.Int("l", 26, "test message length")
-	testConnNum = flag.Int("c", 50, "test connection number")
-	testSeconds = flag.Int("t", 10, "test duration in seconds")
+	testConnNum = flag.Int("c", 2000, "test connection number")
+	testSeconds = flag.Int("t", 30, "test duration in seconds")
 )
 
 func main() {
