@@ -1,32 +1,27 @@
-"""Simple TCP Echo Server
+#!/usr/bin/env python
 
-This example shows how you can create a simple TCP Server (an Echo Service)
-utilizing the builtin Socket Components that the circuits library ships with.
-"""
+# Copyright (c) Twisted Matrix Laboratories.
+# See LICENSE for details.
 
-from circuits import handler, Debugger
-from circuits.net.sockets import TCPServer
+from twisted.internet.protocol import Protocol, Factory
+from twisted.internet import reactor
 
+### Protocol Implementation
 
-class EchoServer(TCPServer):
-
-    @handler("read")
-    def on_read(self, sock, data):
-        """Read Event Handler
-
-        This is fired by the underlying Socket Component when there has been
-        new data read from the connected client.
-
-        ..note :: By simply returning, client/server socket components listen
-                  to ValueChagned events (feedback) to determine if a handler
-                  returned some data and fires a subsequent Write event with
-                  the value returned.
+# This is just about the simplest possible protocol
+class Echo(Protocol):
+    def dataReceived(self, data):
         """
+        As soon as any data is received, write it back.
+        """
+        self.transport.write(data)
 
-        return data
 
-# Start and "run" the system.
-# Bind to port 0.0.0.0:9000
-app = EchoServer(9000)
-Debugger().register(app)
-app.run()
+def main():
+    f = Factory()
+    f.protocol = Echo
+    reactor.listenTCP(4000, f)
+    reactor.run()
+
+if __name__ == '__main__':
+    main()
