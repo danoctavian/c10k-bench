@@ -1,7 +1,18 @@
+var cluster = require('cluster');
 var net = require('net');
+var os = require('os');
 
-var server = net.createServer(function(socket) {
-  socket.pipe(socket);
-});
+if (cluster.isMaster) {
+    for (let i = 0; i < os.cpus().length; i++) {
+        cluster.fork();
+    }
+} else {
+    var server = net.createServer(function(socket) {
+      // Don't crash when connections close
+      socket.on('close', () => undefined)
 
-server.listen(4000, '127.0.0.1');
+      socket.pipe(socket);
+    });
+
+    server.listen(4000, '127.0.0.1');
+}
