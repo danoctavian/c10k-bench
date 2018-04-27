@@ -39,7 +39,7 @@ func main() {
 		wg.Add(1)
 
 		go func() {
-			if conn, err := net.DialTimeout("tcp", *targetAddr, time.Minute*99999); err == nil {
+			if conn, err := net.Dial("tcp", *targetAddr); err == nil {
 				l := len(msg)
 				recv := make([]byte, l)
 
@@ -75,7 +75,7 @@ func main() {
 					}
 				}
 			} else {
-				log.Println(err)
+				log.Fatal(err)
 			}
 
 			wg.Done()
